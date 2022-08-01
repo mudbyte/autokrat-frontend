@@ -26,7 +26,13 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "license-header"
+    ],
+    "rules": {
+      "license-header/header": [ "error", "./resources/license-header.js" ]
+    }
   },
   "browserslist": {
     "production": [
@@ -39,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-license-header": "^0.6.0"
   }
 }
