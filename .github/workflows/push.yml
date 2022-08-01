@@ -1,0 +1,29 @@
+name: Push workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push:
+    name: Push
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: docker build --tag ghcr.io/mudbyte/autokrat-frontend .
+      - name: Push
+        run: docker push ghcr.io/mudbyte/autokrat-frontend
