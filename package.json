@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.9.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -31,7 +34,10 @@
       "license-header"
     ],
     "rules": {
-      "license-header/header": [ "error", "./resources/license-header.js" ]
+      "license-header/header": [
+        "error",
+        "./resources/license-header.js"
+      ]
     }
   },
   "browserslist": {
@@ -48,5 +54,6 @@
   },
   "devDependencies": {
     "eslint-plugin-license-header": "^0.6.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

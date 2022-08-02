@@ -18,10 +18,14 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import MemberTable from "./MemberTable";
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  render(<MemberTable />);
+  const headers = ['Id','Vorname','Nachname','Email','Straße','Hausnummer','Postleitzahl','Stadt'];
+
+  for(const header of headers) {
+    const headerElement = screen.getByText(new RegExp(header));
+    expect(headerElement).toBeInTheDocument();
+  }
 });
