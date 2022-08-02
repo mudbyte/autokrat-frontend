@@ -35,6 +35,9 @@ import {
 } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import AddIcon from '@mui/icons-material/Add';
+import MemberForm from "./MemberForm";
+import {Navigate, Link, Route, Routes} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -50,12 +53,20 @@ function App() {
         <Toolbar/>
         <Divider/>
         <List>
-          <ListItem key={'Mitgliederliste'} disablePadding>
+          <ListItem component={Link} to="/members/new" key={'Add'} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <AddIcon/>
+              </ListItemIcon>
+              <ListItemText style={{color: 'black'}} primary={'Mitglied hinzufügen'}/>
+            </ListItemButton>
+          </ListItem>
+          <ListItem component={Link} to="/members" key={'Mitgliederliste'} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <FormatListBulletedIcon/>
               </ListItemIcon>
-              <ListItemText primary={'Mitgliederliste'}/>
+              <ListItemText style={{color: 'black'}} primary={'Mitgliederliste'}/>
             </ListItemButton>
           </ListItem>
         </List>
@@ -120,7 +131,11 @@ function App() {
             sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
         >
           <Toolbar/>
-          <MemberTable/>
+          <Routes>
+            <Route path="*" element={<Navigate replace to="/members"/>}/>
+            <Route path="/members/new" element={<MemberForm/>}/>
+            <Route path="/members" element={<MemberTable/>}/>
+          </Routes>
         </Box>
       </Box>
   );
