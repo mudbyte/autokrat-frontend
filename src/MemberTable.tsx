@@ -37,56 +37,56 @@ export interface Address {
 }
 
 function MemberTable() {
-    const [data, setData] = useState<Member[]>([]);
+  const [data, setData] = useState<Member[]>([]);
 
-    async function update() {
-        const response = await fetch('/api/members');
-        const data = await response.json() as Member[];
-        setData(data);
-    }
+  async function update() {
+    const response = await fetch('/api/members');
+    const data = await response.json() as Member[];
+    setData(data);
+  }
 
-    useEffect(() => {
-        update();
-    }, []);
+  useEffect(() => {
+    update();
+  }, []);
 
-    return (
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell>Vorname</TableCell>
-                        <TableCell>Nachname</TableCell>
-                        <TableCell>Email</TableCell>
-                        <TableCell>Straße</TableCell>
-                        <TableCell>Hausnummer</TableCell>
-                        <TableCell>Postleitzahl</TableCell>
-                        <TableCell>Stadt</TableCell>
-                        <TableCell>Aktionen</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell>{row.id}</TableCell>
-                            <TableCell>{row.firstName}</TableCell>
-                            <TableCell>{row.lastName}</TableCell>
-                            <TableCell>{row.email}</TableCell>
-                            <TableCell>{row.address.street}</TableCell>
-                            <TableCell>{row.address.streetNumber}</TableCell>
-                            <TableCell>{row.address.zip}</TableCell>
-                            <TableCell>{row.address.city}</TableCell>
-                            <TableCell>
-                                <IconButton aria-label="delete" component={Link} to={`/members/edit/${row.id}`}>
-                                    <EditIcon/>
-                                </IconButton>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{minWidth: 650}} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Id</TableCell>
+            <TableCell>Vorname</TableCell>
+            <TableCell>Nachname</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Straße</TableCell>
+            <TableCell>Hausnummer</TableCell>
+            <TableCell>Postleitzahl</TableCell>
+            <TableCell>Stadt</TableCell>
+            <TableCell>Aktionen</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.firstName}</TableCell>
+              <TableCell>{row.lastName}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>{row.address.street}</TableCell>
+              <TableCell>{row.address.streetNumber}</TableCell>
+              <TableCell>{row.address.zip}</TableCell>
+              <TableCell>{row.address.city}</TableCell>
+              <TableCell>
+                <IconButton aria-label="delete" component={Link} to={`/members/edit/${row.id}`}>
+                  <EditIcon/>
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default MemberTable;
