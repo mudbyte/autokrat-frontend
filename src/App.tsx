@@ -49,96 +49,96 @@ function App() {
   };
 
   const drawer = (
-      <div>
-        <Toolbar/>
-        <Divider/>
-        <List>
-          <ListItem component={Link} to="/members/new" key={'Add'} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AddIcon/>
-              </ListItemIcon>
-              <ListItemText style={{color: 'black'}} primary={'Mitglied hinzufügen'}/>
-            </ListItemButton>
-          </ListItem>
-          <ListItem component={Link} to="/members" key={'Mitgliederliste'} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FormatListBulletedIcon/>
-              </ListItemIcon>
-              <ListItemText style={{color: 'black'}} primary={'Mitgliederliste'}/>
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </div>
+    <div>
+      <Toolbar/>
+      <Divider/>
+      <List>
+        <ListItem component={Link} to="/members/new" key={'Add'} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <AddIcon/>
+            </ListItemIcon>
+            <ListItemText style={{color: 'black'}} primary={'Mitglied hinzufügen'}/>
+          </ListItemButton>
+        </ListItem>
+        <ListItem component={Link} to="/members" key={'Mitgliederliste'} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <FormatListBulletedIcon/>
+            </ListItemIcon>
+            <ListItemText style={{color: 'black'}} primary={'Mitgliederliste'}/>
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </div>
   );
 
   return (
-      <Box sx={{display: 'flex'}}>
-        <CssBaseline/>
-        <AppBar
-            position="fixed"
-            sx={{
-              width: {sm: `calc(100% - ${drawerWidth}px)`},
-              ml: {sm: `${drawerWidth}px`},
-            }}
-        >
-          <Toolbar>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{mr: 2, display: {sm: 'none'}}}
-            >
-              <MenuIcon/>
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
+    <Box sx={{display: 'flex'}}>
+      <CssBaseline/>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: {sm: `calc(100% - ${drawerWidth}px)`},
+          ml: {sm: `${drawerWidth}px`},
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{mr: 2, display: {sm: 'none'}}}
+          >
+            <MenuIcon/>
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
               Mitgliederliste
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Box
-            component="nav"
-            sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
-            aria-label="navigation entries"
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box
+        component="nav"
+        sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+        aria-label="navigation entries"
+      >
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{keepMounted: true}}
+          sx={{
+            display: {xs: 'block', sm: 'none'},
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+          }}
         >
-          <Drawer
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              ModalProps={{keepMounted: true}}
-              sx={{
-                display: {xs: 'block', sm: 'none'},
-                '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
-              }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
-              variant="permanent"
-              sx={{
-                display: {xs: 'none', sm: 'block'},
-                '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
-              }}
-              open
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box
-            component="main"
-            sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: {xs: 'none', sm: 'block'},
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+          }}
+          open
         >
-          <Toolbar/>
-          <Routes>
-            <Route path="*" element={<Navigate replace to="/members"/>}/>
-            <Route path="/members/new" element={<MemberForm/>}/>
-            <Route path="/members/edit/:id" element={<MemberForm/>}/>
-            <Route path="/members" element={<MemberTable/>}/>
-          </Routes>
-        </Box>
+          {drawer}
+        </Drawer>
       </Box>
+      <Box
+        component="main"
+        sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+      >
+        <Toolbar/>
+        <Routes>
+          <Route path="*" element={<Navigate replace to="/members"/>}/>
+          <Route path="/members/new" element={<MemberForm/>}/>
+          <Route path="/members/edit/:id" element={<MemberForm/>}/>
+          <Route path="/members" element={<MemberTable/>}/>
+        </Routes>
+      </Box>
+    </Box>
   );
 }
 

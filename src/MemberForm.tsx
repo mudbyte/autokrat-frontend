@@ -85,48 +85,48 @@ function MemberForm() {
   }
 
   return (
-      <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': {m: 1, width: '25ch'},
-          }}
-          noValidate
-          autoComplete="off"
-      >
-        <div>
-          <TextField required id="firstName" label="Vorname" variant="standard"
-                     value={data.firstName}
-                     onChange={(e) => setData({...data, firstName: e.target.value})}
-          />
-          <TextField required id="lastName" label="Nachname" variant="standard"
-                     value={data.lastName}
-                     onChange={(e) => setData({...data, lastName: e.target.value})}
-          />
-          <TextField required id="email" label="Email" variant="standard"
-                     value={data.email}
-                     onChange={(e) => setData({...data, email: e.target.value})}
-          />
-        </div>
-        <div>
-          <TextField required id="street" label="Straße" variant="standard"
-                     value={data.address.street}
-                     onChange={(e) => setData({...data, address: {...data.address, street: e.target.value}})}
-          />
-          <TextField required id="streetNumber" label="Hausnummer" variant="standard"
-                     value={data.address.streetNumber}
-                     onChange={(e) => setData({...data, address: {...data.address, streetNumber: e.target.value}})}
-          />
-          <TextField required id="zip" label="Postleitzahl" variant="standard"
-                     value={data.address.zip}
-                     onChange={(e) => setData({...data, address: {...data.address, zip: e.target.value}})}
-          />
-          <TextField required id="city" label="Stadt" variant="standard"
-                     value={data.address.city}
-                     onChange={(e) => setData({...data, address: {...data.address, city: e.target.value}})}
-          />
-        </div>
-        <Button variant="contained" onClick={submit}>{id ? 'Speichern' : 'Anlegen'}</Button>
-      </Box>
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': {m: 1, width: '25ch'},
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField required id="firstName" label="Vorname" variant="standard"
+          value={data.firstName}
+          onChange={(e) => setData({...data, firstName: e.target.value})}
+        />
+        <TextField required id="lastName" label="Nachname" variant="standard"
+          value={data.lastName}
+          onChange={(e) => setData({...data, lastName: e.target.value})}
+        />
+        <TextField required id="email" label="Email" variant="standard"
+          value={data.email}
+          onChange={(e) => setData({...data, email: e.target.value})}
+        />
+      </div>
+      <div>
+        <TextField required id="street" label="Straße" variant="standard"
+          value={data.address.street}
+          onChange={(e) => setData({...data, address: {...data.address, street: e.target.value}})}
+        />
+        <TextField required id="streetNumber" label="Hausnummer" variant="standard"
+          value={data.address.streetNumber}
+          onChange={(e) => setData({...data, address: {...data.address, streetNumber: e.target.value}})}
+        />
+        <TextField required id="zip" label="Postleitzahl" variant="standard"
+          value={data.address.zip}
+          onChange={(e) => setData({...data, address: {...data.address, zip: e.target.value}})}
+        />
+        <TextField required id="city" label="Stadt" variant="standard"
+          value={data.address.city}
+          onChange={(e) => setData({...data, address: {...data.address, city: e.target.value}})}
+        />
+      </div>
+      <Button variant="contained" onClick={submit}>{id ? 'Speichern' : 'Anlegen'}</Button>
+    </Box>
   );
 }
 

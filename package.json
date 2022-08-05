@@ -39,7 +39,8 @@
       "license-header/header": [
         "error",
         "./resources/license-header.js"
-      ]
+      ],
+      "indent": ["error", 2]
     }
   },
   "browserslist": {
