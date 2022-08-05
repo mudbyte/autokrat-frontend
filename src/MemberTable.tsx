@@ -17,7 +17,9 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import {Link} from "react-router-dom";
 
 export interface Member {
     id: number;
@@ -60,6 +62,7 @@ function MemberTable() {
                         <TableCell>Hausnummer</TableCell>
                         <TableCell>Postleitzahl</TableCell>
                         <TableCell>Stadt</TableCell>
+                        <TableCell>Aktionen</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -73,6 +76,11 @@ function MemberTable() {
                             <TableCell>{row.address.streetNumber}</TableCell>
                             <TableCell>{row.address.zip}</TableCell>
                             <TableCell>{row.address.city}</TableCell>
+                            <TableCell>
+                                <IconButton aria-label="delete" component={Link} to={`/members/edit/${row.id}`}>
+                                    <EditIcon/>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

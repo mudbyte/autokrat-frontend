@@ -134,6 +134,7 @@ function App() {
           <Routes>
             <Route path="*" element={<Navigate replace to="/members"/>}/>
             <Route path="/members/new" element={<MemberForm/>}/>
+            <Route path="/members/edit/:id" element={<MemberForm/>}/>
             <Route path="/members" element={<MemberTable/>}/>
           </Routes>
         </Box>

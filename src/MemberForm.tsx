@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Button, TextField} from '@mui/material';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export interface Member {
   firstName: string;
@@ -36,6 +36,7 @@ export interface Address {
 
 function MemberForm() {
   const navigate = useNavigate();
+  let {id} = useParams();
 
   const [data, setData] = useState<Member>({
     firstName: '',
@@ -49,15 +50,36 @@ function MemberForm() {
     }
   });
 
-  async function submit() {
+  useEffect(() => {
+    async function load() {
+      if(id) {
+        const response = await fetch(`/api/members/${id}`);
+        const data = await response.json() as Member;
+        setData(data);
+      }
+    }
 
-    await fetch('/api/members', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+    load();
+  },[id]);
+
+  async function submit() {
+    if(id) {
+      await fetch(`/api/members/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+    } else {
+      await fetch('/api/members', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+    }
 
     navigate('/members');
   }
@@ -103,7 +125,7 @@ function MemberForm() {
                      onChange={(e) => setData({...data, address: {...data.address, city: e.target.value}})}
           />
         </div>
-        <Button variant="contained" onClick={submit}>Erstellen</Button>
+        <Button variant="contained" onClick={submit}>{id ? 'Speichern' : 'Anlegen'}</Button>
       </Box>
   );
 }
