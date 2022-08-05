@@ -17,8 +17,22 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {Link} from "react-router-dom";
 
 export interface Member {
@@ -38,6 +52,8 @@ export interface Address {
 
 function MemberTable() {
   const [data, setData] = useState<Member[]>([]);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<Member | null>(null);
 
   async function update() {
     const response = await fetch('/api/members');
@@ -45,9 +61,34 @@ function MemberTable() {
     setData(data);
   }
 
+  async function remove(id: number) {
+    await fetch(`/api/members/${id}`, {
+      method: 'DELETE'
+    });
+
+    await update();
+  }
+
   useEffect(() => {
     update();
   }, []);
+
+  const handleClickOpen = (member: Member) => {
+    setSelected(member);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleConfirm = () => {
+    if(selected) {
+      remove(selected.id);
+    }
+
+    handleClose();
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -77,14 +118,31 @@ function MemberTable() {
               <TableCell>{row.address.zip}</TableCell>
               <TableCell>{row.address.city}</TableCell>
               <TableCell>
-                <IconButton aria-label="delete" component={Link} to={`/members/edit/${row.id}`}>
+                <IconButton aria-label="edit" component={Link} to={`/members/edit/${row.id}`}>
                   <EditIcon/>
+                </IconButton>
+                <IconButton aria-label="delete" onClick={() => handleClickOpen(row)}>
+                  <DeleteIcon/>
                 </IconButton>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {`Sind sie sicher, dass sie "${selected?.firstName} ${selected?.lastName}" löschen wollen?`}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose}>Nein</Button>
+          <Button onClick={handleConfirm} autoFocus>Ja</Button>
+        </DialogActions>
+      </Dialog>
     </TableContainer>
   );
 }
