@@ -36,8 +36,10 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AddIcon from '@mui/icons-material/Add';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import MemberForm from "./MemberForm";
 import {Navigate, Link, Route, Routes} from "react-router-dom";
+import TransactionTable from "./TransactionTable";
 
 const drawerWidth = 240;
 
@@ -67,6 +69,14 @@ function App() {
               <FormatListBulletedIcon/>
             </ListItemIcon>
             <ListItemText style={{color: 'black'}} primary={'Mitgliederliste'}/>
+          </ListItemButton>
+        </ListItem>
+        <ListItem component={Link} to="/transactions" key={'Transaktionen'} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <ReceiptLongIcon/>
+            </ListItemIcon>
+            <ListItemText style={{color: 'black'}} primary={'Transaktionen'}/>
           </ListItemButton>
         </ListItem>
       </List>
@@ -136,6 +146,7 @@ function App() {
           <Route path="/members/new" element={<MemberForm/>}/>
           <Route path="/members/edit/:id" element={<MemberForm/>}/>
           <Route path="/members" element={<MemberTable/>}/>
+          <Route path="/transactions" element={<TransactionTable/>}/>
         </Routes>
       </Box>
     </Box>
